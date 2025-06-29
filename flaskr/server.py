@@ -12,17 +12,16 @@ import os
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'upload'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOAD_FOLDER = "uploads"
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@app.route("/upload", methods =['GET', 'POST'])
+
+@app.route("/upload", methods=["GET", "POST"])
 def upload_file():
     if request.method == "POST":
-        file = request.files['file']
+        file = request.files["file"]
         filename = file.filename
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         return "Done"
-    return render_template('index.html')
-
-
+    return render_template("index.html")
